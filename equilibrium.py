@@ -26,7 +26,7 @@ if __name__ == "__main__":
     print("CAP*:", round(cap_star), "SMAX*:", round(smax_star))
     print("p*:", [round(p_star[t], 2) for t in T])
 
-    # verification: is P* really an equillibrium
+    # verification: is P* really an equilibrium
     P_lp, cap_lp, smax_lp = solve_plant(p_star)
 
     print("cost of P* at p*:     ", round(cost_at(P_star, cap_star, smax_star, p_star)))

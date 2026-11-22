@@ -2,7 +2,7 @@ from design import T, FLAT, COST_CAP, COST_STOR, solve_plant
 from grid import grid_price
 
 # 1. prices if the plant ran flat
-p0 = p = grid_price({t: FLAT for t in T})
+p0 = grid_price({t: FLAT for t in T})
 
 # 2. plant designs itself on p0
 P, cap, smax = solve_plant(p0)

@@ -1,6 +1,4 @@
-import pyomo.environ as pyo, highspy
-import numpy as np
-import matplotlib.pyplot as plt
+import pyomo.environ as pyo
 
 # Constants:
 DEMAND = 150 #t/h of hydrogen to steel plant every hour

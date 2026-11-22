@@ -1,4 +1,4 @@
-import pyomo.environ as pyo, highspy
+import pyomo.environ as pyo
 
 # Constants:
 DEMAND = 150 #t/h of hydrogen to steel plant every hour
@@ -53,6 +53,7 @@ def solve_plant(price):
     build_plant(m)
     
     elec = sum(price[t] * m.P[t] for t in m.T)
+    
     # Objective variable
     m.obj = pyo.Objective(
         expr=COST_CAP * m.CAP + COST_STOR * m.SMAX + elec,

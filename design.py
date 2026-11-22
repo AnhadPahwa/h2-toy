@@ -27,11 +27,9 @@ def ramp_down_rule(m, t):
         return pyo.Constraint.Skip
     return m.P[t-1] - m.P[t] <= 0.2 * m.CAP
 
-# the solver
-def solve_plant(price):
-    m = pyo.ConcreteModel()
+def build_plant(m):
     m.T = pyo.Set(initialize=T)
-
+    
     m.CAP = pyo.Var(within=pyo.NonNegativeReals)
     m.SMAX = pyo.Var(within=pyo.NonNegativeReals)
 
@@ -48,9 +46,13 @@ def solve_plant(price):
     m.power_cap = pyo.Constraint(m.T, rule=lambda m, t: m.P[t] <= m.CAP)
     m.stor_cap  = pyo.Constraint(m.T, rule=lambda m, t: m.I[t] <= m.SMAX)
     m.flex_cap  = pyo.Constraint(expr=m.CAP <= 1.5 * FLAT)   # paper eq. 36
-
+    
+# the solver
+def solve_plant(price):
+    m = pyo.ConcreteModel()
+    build_plant(m)
+    
     elec = sum(price[t] * m.P[t] for t in m.T)
-
     # Objective variable
     m.obj = pyo.Objective(
         expr=COST_CAP * m.CAP + COST_STOR * m.SMAX + elec,

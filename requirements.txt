@@ -1,0 +1,4 @@
+pyomo
+highspy
+numpy
+matplotlib

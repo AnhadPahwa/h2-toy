@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from design import T, FLAT, solve_plant
 from grid import grid_price
+import os
 
 def to_vec(d):
     return np.array([d[t] for t in T]) # for norms
@@ -46,4 +47,5 @@ ax1.set_ylabel("demand residual")
 ax2.set_ylabel("price residual")
 ax2.set_xlabel("iteration")
 ax1.legend()
-plt.savefig("residuals.png", dpi=150)
+os.makedirs("figures", exist_ok=True)
+plt.savefig("figures/residuals.png", dpi=150)
